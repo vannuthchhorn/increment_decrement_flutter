@@ -1,7 +1,6 @@
 
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart' as prefix0;
 import 'package:flutter/material.dart';
 
 void main()=> runApp(MaterialApp(
