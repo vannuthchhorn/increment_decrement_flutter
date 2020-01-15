@@ -10,13 +10,13 @@ class _UserState extends State<User> {
   List users;
   Map userData;
   Future setUser() async{
-    String url = "https://reqres.in/api/users";
+    String url = "https://pixabay.com/api/?key=14001068-da63091f2a2cb98e1d7cc1d82&q=beautiful&image_type=photo&pretty=true";
     http.Response response = await http.get(url);
     // debugPrint(response.body);
     userData = json.decode(response.body);
     setState(() {
       // users = json.decode(response.body);
-      users = userData['data'];
+      users = userData['hits'];
     }); 
   }
   @override
@@ -36,15 +36,24 @@ class _UserState extends State<User> {
           itemCount: users == null ? 0 : users.length,
           itemBuilder: (BuildContext context, int i){
             return Card(
-              child: Row(
+              child: Column(
                 children: <Widget>[
-                  Container(
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(users[i]["avatar"]),
-                    ),
-                  ),
-                  SizedBox(width: 30.0,),
-                  Text(users[i]["first_name"]),
+                 Row(
+                   children: <Widget>[
+                     Container(
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage("${users[i]["userImageURL"]}"),
+                      ),
+                     ),
+                     Container(
+                       padding: EdgeInsets.all(20.0),
+                      child: Text("${users[i]["user"]}", style: TextStyle(fontSize: 20.0, color: Colors.blue),),
+                     )
+                   ],
+                 ),
+                 Container(
+                   child: Image.network("${users[i]["largeImageURL"]}"),
+                 ),
                 ],
               ),
             );
